@@ -1,0 +1,81 @@
+<div class="container">
+      
+    <div class="row">
+      <div class="manage_user col-lg-8 col-md-8 col-sm-8 col-xs-8 container_right">
+        <div class="manage_user col-lg-8 col-md-8 col-sm-8 col-xs-8 container_right">
+          <div class="listing-block table-responsive">
+            <div class="existing">
+              <label class="text-info" id='existing_label'><span class="fa fa-cubes"></span>Articles</label>
+
+              <table id="offers_table" class="display" cellspacing="0" width="100%">
+                <thead>
+                <tr class="list-title">
+                  <th class="text-center"> Title </th>
+                  <th class="text-center"> Text </th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h1>Listing Articles</h1>
+    <%= link_to 'New article', new_article_path %>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Text</th>
+        <th colspan="3"></th>
+      </tr>
+     
+      <% @articles.each do |article| %>
+        <tr>
+          <td><%= article.title %></td>
+          <td><%= article.text %></td>
+          <td><%= link_to 'Show', article_path(article) %></td>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Destroy', article_path(article),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </table>
+
+
+</div>
+
+
+<script type="text/javascript">
+
+
+
+$(document).ready(function() {
+
+
+    $('#offers_table').DataTable( {
+"processing": true,
+        "serverSide": true,
+        "searching" : true,
+        "paging" : false,
+        stateSave: true,
+      "ajax": '/articles/get_articles',"type": 'GET',
+
+        "columns": [
+            {"data": "title"},
+            {"data": "text"}
+        ]
+    });
+
+
+    });
+
+
+
+
+</script>
+
+

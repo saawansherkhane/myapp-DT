@@ -1,0 +1,23 @@
+
+<h1>Listing Subscribers</h1>
+ 
+<%= link_to 'New Subscriber', new_subscriber_path %>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Text</th>
+  </tr>
+ 
+  <% @subscribers.each do |subscriber| %>
+    <tr>
+      <td><%= subscriber.name%></td>
+      <td><%= subscriber.body %></td>
+      <td><%= link_to 'Show', subscriber_path(subscriber) %></td>
+      <td><%= link_to 'Edit', edit_subscriber_path(subscriber) %></td>
+      <td><%= link_to 'Destroy', subscriber_path(subscriber),
+              method: :delete,
+              data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+  <% end %>
+</table>
